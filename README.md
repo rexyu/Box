@@ -1,4 +1,4 @@
-# Box
+# Box https://github.com/byteopen/TVBoxOSC 自动编译
 
 === Source Code - Editing the app default settings ===
 /src/main/java/com/github/tvbox/osc/base/App.java
