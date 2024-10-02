@@ -138,7 +138,52 @@ public class App extends MultiDexApplication {
         putDefault(HawkConfig.SEARCH_VIEW, 1);               //搜索展示: 0=文字列表, 1=缩略图
         putDefault(HawkConfig.PARSE_WEBVIEW, true);          //嗅探Webview: true=系统自带, false=XWalkView
         putDefault(HawkConfig.DOH_URL, 0);                   //安全DNS: 0=关闭, 1=腾讯, 2=阿里, 3=360, 4=Google, 5=AdGuard, 6=Quad9
+        putDefaultApis();
+    }
 
+    private void putDefaultApis() {
+        String url = URL.DOMAIN_NAME_PROXY;
+
+        // 默认加速历史记录
+        List<String> proxyUrlHistory = Hawk.get(HawkConfig.PROXY_URL_HISTORY, new ArrayList<>());
+        proxyUrlHistory.add(url);
+        proxyUrlHistory.add("https://ghproxy.net/");
+        proxyUrlHistory.add("https://mirror.ghproxy.com/");
+        // 默认仓库地址
+        String defaultStoreApi = URL.DEFAULT_STORE_API_URL;
+
+        // 添加默认epg历史记录
+        List<String> epgHistory = Hawk.get(HawkConfig.EPG_HISTORY, new ArrayList<>());
+        epgHistory.add("http://tv.devdev.cn/diyp/epg.php?ch={name}&date={date}");
+        epgHistory.add("https://epg.112114.xyz?ch={name}&date={date}");
+        epgHistory.add("https://epg.112114.free.hr?ch={name}&date={date}");
+        epgHistory.add("https://epg.112114.eu.org?ch={name}&date={date}");
+        epgHistory.add("https://diyp.112114.xyz?ch={name}&date={date}");
+        // 默认epg
+        String defaultEpgUrl = "https://epg.112114.free.hr?ch={name}&date={date}";
+
+
+        // 不添加默认线路
+        // 默认线路地址
+        // String defaultApiName = "自备份线路";
+        // String defaultApi = url + URL.DEFAULT_API_URL;
+        // Map<String, String> defaultApiMap = Hawk.get(HawkConfig.API_MAP, new HashMap<>());
+        // defaultApiMap.put(defaultApiName, defaultApi);
+        // List<String> defaultApiHistory = Hawk.get(HawkConfig.API_NAME_HISTORY, new ArrayList<>());
+        // defaultApiHistory.add(defaultApiName);
+        // putDefault(HawkConfig.API_URL, defaultApi);
+        // putDefault(HawkConfig.API_NAME, defaultApiName);
+        // putDefault(HawkConfig.API_NAME_HISTORY, defaultApiHistory);
+        // putDefault(HawkConfig.API_MAP, defaultApiMap);
+        // 添加默认直播源
+        putDefault(HawkConfig.LIVE_URL, URL.DEFAULT_LIVE_URL);
+
+        putDefault(HawkConfig.DEFAULT_STORE_API, defaultStoreApi);
+        putDefault(HawkConfig.PROXY_URL_HISTORY, proxyUrlHistory);
+        putDefault(HawkConfig.EPG_URL, defaultEpgUrl);
+        putDefault(HawkConfig.EPG_HISTORY, epgHistory);
+        putDefault(HawkConfig.LIVE_SHOW_NET_SPEED, true);
+        putDefault(HawkConfig.IS_GLOBAL_SCALE, true);
     }
 
     private void initLocale() {
