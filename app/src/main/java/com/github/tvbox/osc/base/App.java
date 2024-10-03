@@ -159,7 +159,7 @@ public class App extends MultiDexApplication {
         epgHistory.add("https://epg.112114.eu.org?ch={name}&date={date}");
         epgHistory.add("https://diyp.112114.xyz?ch={name}&date={date}");
         // 默认epg
-        String defaultEpgUrl = "https://epg.112114.free.hr?ch={name}&date={date}";
+        String defaultEpgUrl = "http://tv.devdev.cn/diyp/epg.php?ch={name}&date={date}";
 
 
         // 不添加默认线路
