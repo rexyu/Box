@@ -1,4 +1,4 @@
-
+package com.github.tvbox.osc.base;
 public class URL {
     public static String DOMAIN_NAME_PROXY = "https://mirror.ghproxy.com/";
     // public static final String DOMAIN_NAME_PROXY = "http://192.168.3.159:81";

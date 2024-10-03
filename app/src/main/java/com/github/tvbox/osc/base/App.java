@@ -1,5 +1,7 @@
 package com.github.tvbox.osc.base;
 
+import static com.github.tvbox.osc.base.URL.DEFAULT_API_URL;
+
 import android.os.Environment;
 
 import androidx.multidex.MultiDexApplication;
@@ -28,6 +30,8 @@ import com.yanzhenjie.andserver.AndServer;
 import com.yanzhenjie.andserver.Server;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
@@ -144,11 +148,6 @@ public class App extends MultiDexApplication {
     private void putDefaultApis() {
         String url = URL.DOMAIN_NAME_PROXY;
 
-        // 默认加速历史记录
-        List<String> proxyUrlHistory = Hawk.get(HawkConfig.PROXY_URL_HISTORY, new ArrayList<>());
-        proxyUrlHistory.add(url);
-        proxyUrlHistory.add("https://ghproxy.net/");
-        proxyUrlHistory.add("https://mirror.ghproxy.com/");
         // 默认仓库地址
         String defaultStoreApi = URL.DEFAULT_STORE_API_URL;
 
@@ -178,12 +177,10 @@ public class App extends MultiDexApplication {
         // 添加默认直播源
         putDefault(HawkConfig.LIVE_URL, URL.DEFAULT_LIVE_URL);
 
-        putDefault(HawkConfig.DEFAULT_STORE_API, defaultStoreApi);
-        putDefault(HawkConfig.PROXY_URL_HISTORY, proxyUrlHistory);
+        putDefault(HawkConfig.API_URL, URL.DEFAULT_API_URL);
         putDefault(HawkConfig.EPG_URL, defaultEpgUrl);
         putDefault(HawkConfig.EPG_HISTORY, epgHistory);
         putDefault(HawkConfig.LIVE_SHOW_NET_SPEED, true);
-        putDefault(HawkConfig.IS_GLOBAL_SCALE, true);
     }
 
     private void initLocale() {
