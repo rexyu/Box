@@ -430,15 +430,10 @@ public class LivePlayActivity extends BaseActivity {
         mHandler.postDelayed(mPlaySelectedChannel, 2000);
     }
 
-    
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        // 关键修改：始终消费所有事件
-        boolean handled = true;
-        
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             int keyCode = event.getKeyCode();
-            
             if (keyCode == KeyEvent.KEYCODE_MENU) {
                 showSettingGroup();
             } else if (!isListOrSettingLayoutVisible()) {
@@ -456,6 +451,8 @@ public class LivePlayActivity extends BaseActivity {
                             playNext();
                         break;
                     case KeyEvent.KEYCODE_DPAD_LEFT:
+                        // takagen99 : To cater for newer Android w no Menu button
+                        // playPreSource();
                         if (!isVOD) {
                             showSettingGroup();
                         } else {
@@ -475,26 +472,22 @@ public class LivePlayActivity extends BaseActivity {
                         showChannelList();
                         break;
                     default:
-                        int digit = -1;
                         if (keyCode >= KeyEvent.KEYCODE_0 && keyCode <= KeyEvent.KEYCODE_9) {
-                            digit = keyCode - KeyEvent.KEYCODE_0;
+                            keyCode -= KeyEvent.KEYCODE_0;
                         } else if (keyCode >= KeyEvent.KEYCODE_NUMPAD_0 && keyCode <= KeyEvent.KEYCODE_NUMPAD_9) {
-                            digit = keyCode - KeyEvent.KEYCODE_NUMPAD_0;
-                        }
-                        
-                        if (digit >= 0) {
-                            numericKeyDown(digit);
+                            keyCode -= KeyEvent.KEYCODE_NUMPAD_0;
                         } else {
-                            handled = false; // 不是数字键，不消费
+                            break;
                         }
+                        numericKeyDown(keyCode);
+                        return false;//不再传递数字按键事件
                 }
             }
+        } else if (event.getAction() == KeyEvent.ACTION_UP) {
         }
-        
-        // 关键修改：消费所有处理过的事件
-        return handled || super.dispatchKeyEvent(event);
+        return super.dispatchKeyEvent(event);
     }
-    
+
     // takagen99 : Use onStopCalled to track close activity
     private boolean onStopCalled;
 
