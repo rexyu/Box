@@ -480,7 +480,7 @@ public class LivePlayActivity extends BaseActivity {
                             break;
                         }
                         numericKeyDown(keyCode);
-                        return false;//不再传递数字按键事件
+                        return true;//不再传递数字按键事件
                 }
             }
         } else if (event.getAction() == KeyEvent.ACTION_UP) {
