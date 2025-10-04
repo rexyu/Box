@@ -279,7 +279,8 @@ public class LivePlayActivity extends BaseActivity {
         // Not in Used
         tvTime = findViewById(R.id.tvTime);
         tvNetSpeed = findViewById(R.id.tvNetSpeed);
-
+        
+        livePlayerManager.init(mVideoView);
         // Initialization
         initEpgDateView();
         initEpgListView();
@@ -1734,8 +1735,8 @@ public class LivePlayActivity extends BaseActivity {
             liveChannelGroupList.clear();
             liveChannelGroupList.addAll(list);
             showSuccess();
+            initLiveState(); //全部初始化
         }
-        initLiveState(); //全部初始化
     }
 
     //加载列表
