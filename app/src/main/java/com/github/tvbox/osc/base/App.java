@@ -135,6 +135,7 @@ public class App extends MultiDexApplication {
         putDefault(HawkConfig.PLAY_SCALE, 0);                //画面缩放: 0=默认, 1=16:9, 2=4:3, 3=填充, 4=原始, 5=裁剪
         putDefault(HawkConfig.BACKGROUND_PLAY_TYPE, 0);      //后台：0=关闭, 1=开启, 2=画中画
         putDefault(HawkConfig.PLAY_TYPE, 1);                 //播放器: 0=系统, 1=IJK, 2=Exo, 3=MX, 4=Reex, 5=Kodi
+        putDefault(HawkConfig.LIVE_PLAYER_TYPE, 1);          //直播播放器: 0=系统, 1=IJK, 2=Exo
         putDefault(HawkConfig.IJK_CODEC, "硬解码");           //IJK解码: 软解码, 硬解码
         // 系统选项
         putDefault(HawkConfig.HOME_LOCALE, 0);               //语言: 0=中文, 1=英文
@@ -153,13 +154,12 @@ public class App extends MultiDexApplication {
 
         // 添加默认epg历史记录
         List<String> epgHistory = Hawk.get(HawkConfig.EPG_HISTORY, new ArrayList<>());
-        epgHistory.add("http://tv.devdev.cn/diyp/epg.php?ch={name}&date={date}");
         epgHistory.add("https://epg.112114.xyz?ch={name}&date={date}");
         epgHistory.add("https://epg.112114.free.hr?ch={name}&date={date}");
         epgHistory.add("https://epg.112114.eu.org?ch={name}&date={date}");
         epgHistory.add("https://diyp.112114.xyz?ch={name}&date={date}");
         // 默认epg
-        String defaultEpgUrl = "http://tv.devdev.cn/diyp/epg.php?ch={name}&date={date}";
+        String defaultEpgUrl = "https://epg.112114.xyz?ch={name}&date={date}";
 
 
         // 不添加默认线路
