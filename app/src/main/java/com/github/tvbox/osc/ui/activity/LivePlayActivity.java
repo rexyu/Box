@@ -1734,8 +1734,8 @@ public class LivePlayActivity extends BaseActivity {
             liveChannelGroupList.clear();
             liveChannelGroupList.addAll(list);
             showSuccess();
-            initLiveState();
         }
+        initLiveState(); //全部初始化
     }
 
     //加载列表
